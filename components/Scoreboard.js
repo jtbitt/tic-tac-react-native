@@ -2,18 +2,18 @@ import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 
 export default function Scoreboard ({
-  player1,
-  player2
+  score1,
+  score2
 }) {
   return (
     <View style={styles.scoreBoard}>
       <View style={styles.scoreBox}>
         <Text style={styles.score}>Jay</Text>
-        <Text style={styles.score}>33</Text>
+        <Text style={styles.score}>{score1}</Text>
       </View>
       <View style={styles.scoreBox}>
         <Text style={styles.score}>Player 2</Text>
-        <Text style={styles.score}>0</Text>
+        <Text style={styles.score}>{score2}</Text>
       </View>
     </View>
     

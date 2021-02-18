@@ -1,17 +1,21 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 
 export default class SelectionSquare extends React.Component {
-  onAnswerPress = answerCorrect => {
-    const { onPress } = this.props;
+  onSquarePress = () => {
+    const { id, onPress } = this.props;
 
-    answerCorrect ? onPress(true) : onPress(false);
+    onPress({id: id, play: turn});
   }
 
   render() {
+    const { turn } = this.props;
+    
     return (
       <View style={styles.square}>
-        <Text style={styles.text}>X</Text>
+        <TouchableOpacity onPress={() => this.onSquarePress()}>
+          <Text style={styles.text}>{turn}</Text>
+        </TouchableOpacity>
       </View>
     )
   }
