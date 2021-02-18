@@ -20,23 +20,22 @@ export default class App extends React.Component {
   }
 
   onPlayMade = updatedBox => {
-    const { boxes } = this.state;
+    const { xTurn, boxes } = this.state;
     const newBoxes = [...this.state.boxes];
     newBoxes[updatedBox.id]['play'] = updatedBox.play;
 
-    this.setState({ boxes: newBoxes });
-
-    console.log(updatedBox);
+    this.setState({ xTurn: !xTurn, boxes: newBoxes });
   }
 
   checkWinner = () => {
-
+    // game logic
+    // reset state if there is a winner
   }
 
   checkTurn = () => {
     const { xTurn } = this.state;
 
-    return xTurn ? 'X' : 'O';
+    return xTurn ? 'x' : 'o';
   }
 
   render () {
