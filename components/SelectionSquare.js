@@ -19,6 +19,7 @@ export default class SelectionSquare extends React.Component {
 
 const styles = StyleSheet.create({
   square: {  
+    width: '30%',
     padding: 30
   },
   text: {
