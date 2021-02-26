@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, Button } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 
-import { Scoreboard, SelectionSquare } from "./components";
+import { Scoreboard, SelectionSquare, ResetButton } from "./components";
 import { Box } from "./shared/interfaces/box.interface";
 
 // // 1. atomic operations, small
@@ -34,7 +34,6 @@ const lines = [
 ];
 
 export default function App() {
-  console.log("re-render");
   const [xTurn, setTurn] = useState(true);
   const [xScore, setScoreX] = useState(0);
   const [oScore, setScoreO] = useState(0);
@@ -83,9 +82,6 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <View>
-        <Text style={styles.title}>Tic Tac</Text>
-      </View>
       <View style={styles.board}>
         {boxes.map((box, i) => (
           <SelectionSquare
@@ -96,8 +92,8 @@ export default function App() {
           />
         ))}
       </View>
-      <Button title="cool" onPress={resetGame} />
       <Scoreboard xScore={xScore} oScore={oScore} />
+      <ResetButton onPress={resetGame} />
     </View>
   );
 }
@@ -109,10 +105,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-around",
     padding: "15%",
-  },
-  title: {
-    color: "white",
-    fontSize: 40,
   },
   board: {
     flexDirection: "row",

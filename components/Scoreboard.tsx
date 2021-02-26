@@ -27,7 +27,8 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   scoreBox: {
-    padding: 40,
+    paddingLeft: 20,
+    paddingRight: 20,
   },
   score: {
     fontSize: 30,
