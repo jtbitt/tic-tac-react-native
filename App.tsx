@@ -38,6 +38,7 @@ export default function App() {
   const [xScore, setScoreX] = useState(0);
   const [oScore, setScoreO] = useState(0);
   const [boxes, setBoxes] = useState(boxArray);
+  const [gameOver, setGameOver] = useState(false);
 
   const onPlayMade = (updatedBox: Box) => {
     const newBoxes = [...boxes].map((box: Box) => {
@@ -66,6 +67,7 @@ export default function App() {
       currentPlayer === "X"
         ? setScoreX(() => xScore + 1)
         : setScoreO(() => oScore + 1);
+      setGameOver(true);
     }
     setTurn(!xTurn);
   };
@@ -78,6 +80,7 @@ export default function App() {
     const newBoxes = [...boxes].map((box, i) => ({ id: i, play: "" }));
     setBoxes(newBoxes);
     setTurn(true);
+    setGameOver(false);
   };
 
   return (
@@ -88,6 +91,7 @@ export default function App() {
             box={box}
             key={i}
             turn={checkTurn()}
+            gameOver={gameOver}
             onPress={onPlayMade}
           />
         ))}

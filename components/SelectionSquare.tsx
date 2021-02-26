@@ -6,16 +6,18 @@ import { Box } from "../shared/interfaces/box.interface";
 interface ISelectionSquareProps {
   box: Box;
   turn: string;
+  gameOver: boolean;
   onPress: ({}: Box) => void;
 }
 
 export const SelectionSquare = ({
   box,
   turn,
+  gameOver,
   onPress,
 }: ISelectionSquareProps) => {
   const onSquarePress = () => {
-    if (!box.play.length) {
+    if (!box.play.length && !gameOver) {
       onPress({ id: box.id, play: turn });
     }
   };
