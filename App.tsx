@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import React, { useState, useEffect } from "react";
+import { StyleSheet, Text, View, Button } from "react-native";
 
 import { Scoreboard, SelectionSquare } from "./components";
 import { Box } from "./shared/interfaces/box.interface";
@@ -34,13 +34,14 @@ const lines = [
 ];
 
 export default function App() {
+  console.log("re-render");
   const [xTurn, setTurn] = useState(true);
   const [xScore, setScoreX] = useState(0);
   const [oScore, setScoreO] = useState(0);
   const [boxes, setBoxes] = useState(boxArray);
 
   const onPlayMade = (updatedBox: Box) => {
-    const newBoxes = [...boxes].map((box) => {
+    const newBoxes = [...boxes].map((box: Box) => {
       if (updatedBox.id === box.id) {
         return {
           ...box,
@@ -74,6 +75,12 @@ export default function App() {
     return xTurn ? "X" : "O";
   };
 
+  const resetGame = () => {
+    const newBoxes = [...boxes].map((box, i) => ({ id: i, play: "" }));
+    setBoxes(newBoxes);
+    setTurn(true);
+  };
+
   return (
     <View style={styles.container}>
       <View>
@@ -82,13 +89,14 @@ export default function App() {
       <View style={styles.board}>
         {boxes.map((box, i) => (
           <SelectionSquare
-            id={box.id}
+            box={box}
             key={i}
             turn={checkTurn()}
             onPress={onPlayMade}
           />
         ))}
       </View>
+      <Button title="cool" onPress={resetGame} />
       <Scoreboard xScore={xScore} oScore={oScore} />
     </View>
   );
