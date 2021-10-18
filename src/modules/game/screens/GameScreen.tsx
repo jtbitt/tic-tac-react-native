@@ -1,25 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import React, { useState } from "react";
+import { StyleSheet, View } from "react-native";
 
-import { Scoreboard, SelectionSquare, ResetButton } from "./components";
-import { Box } from "./shared/interfaces/box.interface";
-
-// // 1. atomic operations, small
-// const Dialog = () => {
-//   const [isOpen, setIsOpen] = useState(false);
-// }
-// // 2. when it grows, we usually introduce useReducer(...)
-// // more complex state management
-// // 3. When it comes to API calls https://bigsondev.com/blog/how-to-fetch-data-in-react-using-pokeapi/
-// // react-query library
-// const {error, isLoading, data } = useQuery(fetch/axios);
-// const {error, isLoading, data } = useFetch() // custom hook
-
-// I love unit testing business logic  -> jest, mapBoxes(...), mapBoxes(...)
-// I do e2e -> Cypress, critical path testing
-// ^ integration testing
-// A/B testing -> LaunchDarkly, Google Optimize
-// Screen recording with e.g. HotJar
+import { Scoreboard, SelectionSquare, ResetButton } from "../components";
+import { Box } from "../interfaces/box.interface";
+import { updateBoxes } from "../utils/utils";
 
 const boxArray = Array.from({ length: 9 }, (box, i) => ({ id: i, play: "" }));
 const lines = [
@@ -33,7 +17,7 @@ const lines = [
   [2, 4, 6],
 ];
 
-export default function App() {
+export const GameScreen = () => {
   const [xTurn, setTurn] = useState(true);
   const [xScore, setScoreX] = useState(0);
   const [oScore, setScoreO] = useState(0);
@@ -41,15 +25,7 @@ export default function App() {
   const [gameOver, setGameOver] = useState(false);
 
   const onPlayMade = (updatedBox: Box) => {
-    const newBoxes = [...boxes].map((box: Box) => {
-      if (updatedBox.id === box.id) {
-        return {
-          ...box,
-          play: updatedBox.play,
-        };
-      }
-      return box;
-    });
+    const newBoxes = updateBoxes(boxes, updatedBox);
 
     setBoxes(newBoxes);
     checkWinner(newBoxes);
@@ -100,7 +76,7 @@ export default function App() {
       <ResetButton onPress={resetGame} />
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
