@@ -17,9 +17,9 @@ yarn
 
 ## Development
 
-Runs the app in the development mode. You can use ios or android.\
+Runs the app in the development mode. You can use ios or android.
 
-The app will reload if you make edits.\
+The app will reload if you make edits.
 
 ```
 yarn start
