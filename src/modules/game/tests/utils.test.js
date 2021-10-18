@@ -1,4 +1,4 @@
-import { updateBoxes } from "../utils";
+import { updateBoxes } from "../utils/utils";
 const startingBoxes = Array.from({ length: 9 }, (box, i) => ({
   id: i,
   play: "",
